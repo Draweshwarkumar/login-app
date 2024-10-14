@@ -4,8 +4,8 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import {MatButtonModule} from '@angular/material/button';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes), provideClientHydration(), provideAnimationsAsync(),MatButtonModule]
+  providers: [provideRouter(routes), provideClientHydration(), provideAnimationsAsync()]
+  // Remove MatButtonModule from here
 };
