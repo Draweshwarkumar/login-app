@@ -1,0 +1,7 @@
+.custom-link {
+    color: white; /* Set the color you need */
+    text-decoration: none; /* Remove underline if needed */
+}
+.example-spacer{
+    flex: 1 1 auto;
+}
