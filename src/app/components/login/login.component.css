@@ -1,3 +1,13 @@
-.full-width{
-    width: 100%;
+.bootstrap-wraper {
+    width: 50%; /* Set parent container width to 60% */
+    margin: 0 auto; /* Centers the container with equal margin on both sides */
+   
+}
+
+.full-width {
+    width: 100%; /* Mat-form-field takes full width */
+}
+
+.mat-form-field {
+    width: 100%; /* Ensure mat-form-field also takes full width */
 }
