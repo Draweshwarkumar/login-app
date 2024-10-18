@@ -11,8 +11,9 @@ export class LoginService {
   constructor(private http: HttpClient) { } // Inject HttpClient here
 
   generateToken(credentials: any) {
-    return this.http.post(`${this.url}/auth/login`, credentials); // Use HttpClient to make requests
+    return this.http.post(`${this.url}/auth/login`, credentials); // Use backticks for string interpolation
   }
+  
 
   loginUser(token: string) {
     localStorage.setItem("token", token);
