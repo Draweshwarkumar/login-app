@@ -4,17 +4,15 @@ import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http'; // Add HttpClientModule
 import { LoginService } from '../../service/login.service';
-import { response } from 'express';
-import { error } from 'console';
-
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [MatFormFieldModule, MatInputModule, FormsModule, MatButtonModule, CommonModule],
+  imports: [MatFormFieldModule, MatInputModule, FormsModule, MatButtonModule, CommonModule, HttpClientModule], // Add HttpClientModule here
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'] // Use styleUrls, not styleUrl
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
   
@@ -25,24 +23,21 @@ export class LoginComponent implements OnInit {
 
   constructor(private loginService: LoginService) {} // Inject the LoginService
 
-  ngOnInit(): void {
-     
-  }
+  ngOnInit(): void {}
 
   onSubmit() {
     if ((this.credentials.username !== '' && this.credentials.password !== '') && 
         (this.credentials.username !== null && this.credentials.password !== null)) {
-      console.log("We have to submit the form to server");
-      // You can call your login service here, e.g. this.loginService.doLogin(this.credentials);
+      console.log("We have to submit the form to the server");
+      // Call the login service
       this.loginService.generateToken(this.credentials).subscribe(
-        response=>{
+        response => {
             console.log(response);
         },
-        error=>{
+        error => {
           console.log(error);
-
         }
-      )
+      );
     } else {
       console.log("Fields are empty!!");
     }
