@@ -1,23 +1,45 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Component, OnInit } from '@angular/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http'; // Add HttpClientModule
+import { LoginService } from '../../service/login.service';
 
-import { LoginComponent } from './login.component';
+@Component({
+  selector: 'app-login',
+  standalone: true,
+  imports: [MatFormFieldModule, MatInputModule, FormsModule, MatButtonModule, CommonModule, HttpClientModule], // Add HttpClientModule here
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
+})
+export class LoginComponent implements OnInit {
 
-describe('LoginComponent', () => {
-  let component: LoginComponent;
-  let fixture: ComponentFixture<LoginComponent>;
+  credentials = {
+    username: '',
+    password: ''
+  };
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [LoginComponent,]
-    })
-    .compileComponents();
-    
-    fixture = TestBed.createComponent(LoginComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+  constructor(private loginService: LoginService) {} // Inject the LoginService
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+  ngOnInit(): void {}
+
+  onSubmit() {
+    if ((this.credentials.username !== '' && this.credentials.password !== '') && 
+        (this.credentials.username !== null && this.credentials.password !== null)) {
+      console.log("We have to submit the form to the server");
+      // Call the login service
+      this.loginService.generateToken(this.credentials).subscribe(
+        response => {
+          console.log(response);
+        },
+        error => {
+          console.log(error);
+        }
+      );
+    } else {
+      console.log("Fields are empty!!");
+    }
+  }
+}

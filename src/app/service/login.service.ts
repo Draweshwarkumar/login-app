@@ -12,29 +12,25 @@ export class LoginService {
   constructor(private http: HttpClient) { } // Inject HttpClient
 
   // Generates a token by sending credentials to the server
-  generateToken(credentials: any): Observable<any> { // Use Observable for the HTTP response type
-    return this.http.post(`${this.url}/auth/login`, credentials); // Use backticks for URL interpolation
+  generateToken(credentials: any): Observable<any> {
+    return this.http.post(`${this.url}/auth/login`, credentials);
   }
 
-  // Logs the user in by storing the token in localStorage
   loginUser(token: string): boolean {
     localStorage.setItem("token", token);
-    return true; // Returning true as a success flag
+    return true;
   }
 
-  // Checks if the user is logged in
   isLoggedIn(): boolean {
     let token = localStorage.getItem("token");
-    return token !== undefined && token !== '' && token !== null; // Simplified token check
+    return token !== undefined && token !== '' && token !== null;
   }
 
-  // Logs the user out by removing the token from localStorage
   logout(): boolean {
     localStorage.removeItem('token');
-    return true; // Returning true as a success flag
+    return true;
   }
 
-  // Gets the stored token from localStorage
   getToken(): string | null {
     return localStorage.getItem("token");
   }
